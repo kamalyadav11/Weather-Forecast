@@ -4,31 +4,40 @@ import Charts from "../components/Charts";
 import GoogleMap from "../components/GoogleMap";
 
 class WeatherList extends Component {
+  state = {
+    error: ""
+  };
+
   renderCityList(cityData) {
-    const { id } = cityData.city;
-    const { lon, lat } = cityData.city.coord;
-    const temperature = _.map(
-      cityData.list.map(weather => weather.main.temp),
-      temp => temp - 273
-    );
-    const pressure = cityData.list.map(weather => weather.main.pressure);
-    const humidity = cityData.list.map(weather => weather.main.humidity);
-    return (
-      <tr key={id}>
-        <td>
-          <GoogleMap lon={lon} lat={lat} />
-        </td>
-        <td>
-          <Charts data={temperature} color={"blue"} units="C" />
-        </td>
-        <td>
-          <Charts data={pressure} color={"red"} units="hPA" />
-        </td>
-        <td>
-          <Charts data={humidity} color={"green"} units="%" />
-        </td>
-      </tr>
-    );
+    if (cityData === undefined) {
+      return <div>Please Enter a Valid City name</div>;
+    } else {
+      const { id } = cityData.city;
+      const { lon, lat } = cityData.city.coord;
+      const temperature = _.map(
+        cityData.list.map(weather => weather.main.temp),
+        temp => temp - 273
+      );
+      const pressure = cityData.list.map(weather => weather.main.pressure);
+      const humidity = cityData.list.map(weather => weather.main.humidity);
+
+      return (
+        <tr key={id}>
+          <td>
+            <GoogleMap lon={lon} lat={lat} />
+          </td>
+          <td>
+            <Charts data={temperature} color={"blue"} units="C" />
+          </td>
+          <td>
+            <Charts data={pressure} color={"red"} units="hPA" />
+          </td>
+          <td>
+            <Charts data={humidity} color={"green"} units="%" />
+          </td>
+        </tr>
+      );
+    }
   }
 
   render() {
