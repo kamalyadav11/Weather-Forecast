@@ -8,8 +8,7 @@ class WeatherList extends Component {
     if (cityData === undefined) {
       return <div>Please Enter a Valid City name</div>;
     } else {
-      const { id } = cityData.city;
-      const { lon, lat } = cityData.city.coord;
+      const { id, name } = cityData.city;
       const temperature = _.map(
         cityData.list.map(weather => weather.main.temp),
         temp => temp - 273
@@ -19,9 +18,7 @@ class WeatherList extends Component {
 
       return (
         <tr key={id}>
-          <td>
-            <GoogleMap lon={lon} lat={lat} />
-          </td>
+          <td>{name}</td>
           <td>
             <Charts data={temperature} color={"blue"} units="C" />
           </td>
