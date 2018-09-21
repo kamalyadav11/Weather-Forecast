@@ -14,6 +14,10 @@ class SearchBar extends Component {
 
   onFormSubmit = e => {
     e.preventDefault();
+    if (!this.state.text) {
+      alert("Please enter a valid city");
+      return;
+    }
 
     this.props.fetchWeather(this.state.text);
     this.setState({ text: "" });
