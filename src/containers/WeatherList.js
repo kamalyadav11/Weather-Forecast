@@ -4,10 +4,6 @@ import Charts from "../components/Charts";
 import GoogleMap from "../components/GoogleMap";
 
 class WeatherList extends Component {
-  state = {
-    error: ""
-  };
-
   renderCityList(cityData) {
     if (cityData === undefined) {
       return <div>Please Enter a Valid City name</div>;

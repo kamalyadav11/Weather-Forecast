@@ -15,7 +15,7 @@ class SearchBar extends Component {
   onFormSubmit = e => {
     e.preventDefault();
     if (!this.state.text) {
-      alert("Please enter a valid city");
+      alert("Search field can't be empty");
       return;
     }
 
